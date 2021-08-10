@@ -12,18 +12,22 @@ class AddTargetPage extends StatefulWidget {
 }
 
 class _AddTargetPageState extends State<AddTargetPage> {
+  DateTime targetDate;
   CarouselController carouselController = new CarouselController();
   int correntCarouselPage = 0;
 
   int _currentIndex = 0;
 
-  Widget _stepCard({@required String title, @required String subTitle, @required String description}) {
+  Widget _stepCard(
+      {@required String title,
+      @required String subTitle,
+      @required String description}) {
     Size size = MediaQuery.of(context).size;
 
     return Container(
       width: size.width,
       padding: const EdgeInsets.all(25.0),
-      margin: const EdgeInsets.all(35.0),
+      margin: const EdgeInsets.all(25.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(25.0)),
         color: backgroungMainWhiteColor,
@@ -42,25 +46,34 @@ class _AddTargetPageState extends State<AddTargetPage> {
           Text(
             title,
             style: TextStyle(
-              fontSize: 19,
-              fontWeight: FontWeight.w800,
-              color: textColor
-            ),
+                fontSize: 21, fontWeight: FontWeight.w800, color: textColor),
           ),
-          Text(
-            subTitle,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w800,
-              color: textColor
-            ),
-          ),
-          Text(
-            description,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: textColor
+          SizedBox(
+            width: size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  subTitle,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: textColor),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                SingleChildScrollView(
+                  child: Text(
+                    description,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: textColor),
+                  ),
+                ),
+              ],
             ),
           )
         ],
@@ -79,9 +92,12 @@ class _AddTargetPageState extends State<AddTargetPage> {
             borderRadius: BorderRadius.all(Radius.circular(25))),
         elevation: 0,
       ),
-      onPressed: () { 
-        if (text == "Далее") carouselController.nextPage();
-        else if (text == "Назад") carouselController.previousPage();
+      onPressed: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+        if (text == "Далее")
+          carouselController.nextPage();
+        else if (text == "Назад")
+          carouselController.previousPage();
         else if (text == "Добавить") toModulesPage(context, 2);
       },
       child: Padding(
@@ -102,60 +118,163 @@ class _AddTargetPageState extends State<AddTargetPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: backgroungMainWhiteColor,
-      extendBodyBehindAppBar: false,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25.0),
-          child: Column(
-            children: <Widget>[
-              CarouselSlider(
-                carouselController: carouselController,
-                options: CarouselOptions(
-                  onPageChanged: (index, carouselPageChangedReason) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                  initialPage: correntCarouselPage,
-                  height: size.height * 0.5,
-                  viewportFraction: 1,
-                  enableInfiniteScroll: false
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        backgroundColor: backgroungMainWhiteColor,
+        extendBodyBehindAppBar: false,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 25.0),
+            child: Column(
+              children: <Widget>[
+                CarouselSlider(
+                  carouselController: carouselController,
+                  options: CarouselOptions(
+                      onPageChanged: (index, carouselPageChangedReason) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                      initialPage: correntCarouselPage,
+                      height: size.height * 0.6,
+                      viewportFraction: 1,
+                      enableInfiniteScroll: false),
+                  items: <Widget>[
+                    _stepCard(
+                        title: "S - Specific",
+                        subTitle: "Что конкретно нужно сделать?",
+                        description:
+                            "    «Specific» – конкретный.\r\n   Каждая цель должна иметь предельно конкретную формулировку, исключающую вариативность в её понимании.\r\n\r\n\    Необходимо ответить на вопрос: «Что я должен сделать?» Используйте глагол действия (быть, стать, заработать, выиграть)."),
+                    _stepCard(
+                        title: "M - Measurable",
+                        subTitle: "Как понять, что цель достигнута?",
+                        description:
+                            "    «Measurable» – измеримый.\r\n    Это такое свойство формулировки, которое позволит вам при подведении итогов точно ответить на вопрос: «Достигнута ли желаемая Цель?»\r\n\r\n\    Показателем является точная сумма просмотров, заработанных денег, пройденных километров, проценты или различные победы в конкурсах, получение сертефикатов"),
+                    _stepCard(
+                        title: "A - Achievable",
+                        subTitle: "Цель достижима?",
+                        description:
+                            "    «Achievable» – достижимый.\r\n    Имеются ли необходимые ресурсы: время, деньги, силы (физические и моральные), умения и т.д.?\r\n\r\n\    Несоблюдение этого критерия становится причиной того, что поставленные цели не мотивируют и даже вгоняют в невроз."),
+                    _stepCard(
+                        title: "R - Relevant",
+                        subTitle: "Какие выгоды принесет выполнение цели?",
+                        description:
+                            "«Relevant» – значимый.\r\n    Актуальна ли цель? Согласуется ли она с другими целями и стоит ли она того, чтобы потратить ваше время.\r\n\r\n\    Если от достижения цели нет выгод, то действительно ли ее выполнение необходимо?"),
+                    _stepCard(
+                        title: "T - Time-bound",
+                        subTitle: "За какое время нужно достичь цель?",
+                        description:
+                            "«Time-bound» – временные рамки.\r\n    Установите разумные сроки для завершения вашей цели, так что это держит вас в фокусе."),
+                  ],
                 ),
-                items: <Widget>[
-                  _stepCard(title: "S - Specific", subTitle: "Что конкретно нужно сделать?", description: "Описание"),
-                  _stepCard(title: "M - Measurable", subTitle: "Второй", description: "Описание"),
-                  _stepCard(title: "A - Achievable", subTitle: "Второй", description: "Описание"),
-                  _stepCard(title: "R - Relevant", subTitle: "Второй", description: "Описание"),
-                  _stepCard(title: "T - Time-bound", subTitle: "Второй", description: "Описание"),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
-                  keyboardType: TextInputType.multiline,
-                  minLines: 6,
-                  maxLines: 6, //null
-                  maxLength: 250,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    minLines: (_currentIndex != 4) ? 6 : 2,
+                    maxLines: 6,
+                    maxLength: 250,
+                    cursorColor: lightBlue,
+                    decoration: InputDecoration(
+                      labelText: _getLebel(),
+                      labelStyle: TextStyle(color: lightBlue, fontSize:14),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: lightBlue, width: 2.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: lightBlue, width: 1.0),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  if(_currentIndex != 0) button("Назад", whiteGrey),
-                  if (_currentIndex != 4) button("Далее", lightBlue),
-                  if (_currentIndex == 4) button("Добавить", grassGreen)
-                ],
-              )
-            ],
+                (_currentIndex == 4)
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shadowColor: Colors.transparent,
+                            minimumSize: Size(50, 29),
+                            padding: EdgeInsets.all(5),
+                            primary:
+                                (targetDate == null) ? whiteGrey : seaWave50,
+                            onPrimary: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25))),
+                            elevation: 0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.date_range_rounded,
+                                color: mainShadowColor,
+                                size: 27,
+                              ),
+                              SizedBox(
+                                width: 3,
+                                height: 5,
+                              ),
+                              Text(
+                                targetDate == null
+                                    ? 'Выбор даты'
+                                    : "${targetDate.day}.${targetDate.month}.${targetDate.year}",
+                                style: TextStyle(
+                                  color: mainShadowColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          onPressed: () {
+                            _selectTargetDate();
+                          },
+                        ),
+                      )
+                    : Container(),
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    if (_currentIndex == 0) button("Отмена", whiteGrey),
+                    if (_currentIndex != 0) button("Назад", whiteGrey),
+                    if (_currentIndex != 4) button("Далее", lightBlue),
+                    if (_currentIndex == 4) button("Добавить", grassGreen)
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  _getLebel() {
+    if (_currentIndex == 0) return 'Что конкретно нужно сделать?';
+    if (_currentIndex == 1) return 'Как понять, что цель достигнута?';
+    if (_currentIndex == 2) return 'Можно ли достичь поставленную цель?';
+    if (_currentIndex == 3) return 'Какие выгоды принесет выполнение цели?';
+    if (_currentIndex == 4) return 'За какое время нужно достичь цель?';
+  }
+
+  void _selectTargetDate() async {
+    DateTime date = await showDatePicker(
+      context: context,
+      initialDate: new DateTime.now(),
+      firstDate: new DateTime.now().subtract(new Duration(days: 30)),
+      lastDate: new DateTime.now().add(new Duration(days: 30)),
+    );
+
+    setState(() {
+      targetDate = date;
+    });
   }
 }
