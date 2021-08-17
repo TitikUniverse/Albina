@@ -4,14 +4,12 @@ import 'package:albina/modules/cash.dart';
 import 'package:albina/modules/notesList.dart';
 import 'package:albina/modules/lifeBalance.dart';
 import 'package:albina/templates/NavBar.dart';
-import 'package:albina/services/gradientBoxBorder.dart';
-import 'package:albina/services/gradientIconMask.dart';
 import 'package:flutter/material.dart';
 
 class ModulesScreen extends StatefulWidget {
   ModulesScreen({Key key, this.pageNum}) : super(key: key);
 
-  int pageNum;
+  final int pageNum;
   @override
   _ModulesScreenState createState() => _ModulesScreenState();
 }

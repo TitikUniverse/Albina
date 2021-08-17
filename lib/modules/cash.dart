@@ -1,11 +1,8 @@
-import 'package:albina/constants.dart';
-import 'package:albina/pages/screens/QrCode.dart';
-import 'package:albina/navigation.dart';
+
 import 'package:albina/widgets/cashAlnaliticsModule.dart';
 import 'package:albina/widgets/expenseModule.dart';
 import 'package:albina/widgets/incomeModule.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 class CashView extends StatefulWidget {
   CashView({Key key}) : super(key: key);

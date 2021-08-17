@@ -23,6 +23,12 @@ const Color greenIndiator = Color(0xFF32ff00);
 const double marginMessage = 18.0;
 const double marginCardContent = 8.0;
 
+const Color blueContrast = Color(0xFF4d66c7);
+const Color lightBlueContrast = Color(0xFF5dcbf2);
+const Color greenContrast = Color(0xFF74ce3e);
+const Color yellowContrast = Color(0xFFe2dc10);
+const Color orangeContrast = Color(0xFFfe8020);
+
 
 // All hex value from 100% to 0% alpha:
 //     100% — FF

@@ -1,10 +1,7 @@
 import 'package:albina/constants.dart';
+import 'package:albina/navigation.dart';
 import 'package:albina/templates/NavBar.dart';
-import 'package:albina/services/gradientBoxBorder.dart';
 import 'package:flutter/material.dart';
-
-import '../../navigation.dart';
-import '../../navigation.dart';
 // временно?
 
 class MainScreen extends StatefulWidget {

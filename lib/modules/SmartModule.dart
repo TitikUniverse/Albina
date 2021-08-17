@@ -1,7 +1,10 @@
 import 'package:albina/constants.dart';
 import 'package:albina/navigation.dart';
+import 'package:albina/services/gradientIconMask.dart';
+import 'package:albina/templates/NavBar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SmartTarget extends StatefulWidget {
   SmartTarget({Key key}) : super(key: key);
@@ -44,7 +47,7 @@ class _SmartTargetState extends State<SmartTarget> {
             margin: EdgeInsets.only(top: 15),
             alignment: Alignment.centerLeft,
             child: Text(
-              'Цель до ${date}',
+              'Цель до ' + date,
               style: TextStyle(
                   color: whiteGrey, fontSize: 18, fontWeight: FontWeight.w800),
             ),
@@ -52,40 +55,60 @@ class _SmartTargetState extends State<SmartTarget> {
           SizedBox(
             height: marginCardContent,
           ),
-          Container(
-            height: 29,
-            padding: EdgeInsets.zero,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-              boxShadow: [
-                BoxShadow(
-                  color: seaWave50,
-                  offset: const Offset(0.0, 0.0),
-                  blurRadius: 7.0,
-                  spreadRadius: 0.1,
-                )
-              ],
-            ),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shadowColor: Colors.transparent,
-                minimumSize: Size(50, 29),
-                primary: lightBlue,
-                onPrimary: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25))),
-                elevation: 0,
-              ),
-              onPressed: () {},
-              child: const Text(
-                'Пометить выполненым',
-                style: TextStyle(
-                  color: whiteColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: seaWave50,
+                      offset: const Offset(0.0, 0.0),
+                      blurRadius: 7.0,
+                      spreadRadius: 0.1,
+                    )
+                  ],
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: indigo,
+                    shadowColor: Colors.transparent,
+                    fixedSize: Size(40, 40),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                  ),
+                  onPressed: () {},
+                  child: Icon(Icons.delete_rounded),
                 ),
               ),
-            ),
+              Container(
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: seaWave,
+                      offset: const Offset(0.0, 0.0),
+                      blurRadius: 7.0,
+                      spreadRadius: 0.1,
+                    )
+                  ],
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: indigo,
+                    shadowColor: Colors.transparent,
+                    fixedSize: Size(40, 40),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                  ),
+                  onPressed: () {},
+                  child: Icon(Icons.done_rounded),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -120,7 +143,15 @@ class _SmartTargetState extends State<SmartTarget> {
                     size: 25,
                     color: whiteGrey,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => FullScreenDialog(),
+                        fullscreenDialog: true,
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
@@ -159,7 +190,9 @@ class _SmartTargetState extends State<SmartTarget> {
             height: 55,
             width: 55,
             child: ElevatedButton(
-              onPressed: () { toAddTargetPage(context); },
+              onPressed: () {
+                toAddTargetPage(context);
+              },
               style: ElevatedButton.styleFrom(
                   elevation: 0,
                   primary: Colors.blue,
@@ -190,6 +223,194 @@ class _SmartTargetState extends State<SmartTarget> {
           ),
           Spacer(),
         ],
+      ),
+    );
+  }
+}
+
+class FullScreenDialog extends StatelessWidget {
+  Widget smartInfoItem(
+      BuildContext context, Color color, String label, String translation) {
+    return Container(
+      margin: EdgeInsets.only(top: marginCardContent),
+      width: MediaQuery.of(context).size.width * 0.80,
+      padding: EdgeInsets.symmetric(
+        horizontal: 20.0,
+        vertical: 10.0,
+      ),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(25)),
+      ),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              bottom: 1, // Space between underline and text
+            ),
+            padding: EdgeInsets.only(
+              bottom: 1, // Space between underline and text
+            ),
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+              color: whiteColor,
+              width: 2.0, // Underline thickness
+            ))),
+            child: Text(
+              label,
+              style: TextStyle(
+                color: whiteColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+          Text(
+            translation,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: whiteColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: noAppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Column(
+            children: [
+              Text(
+                "Технология SMART",
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 21,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Text(
+                "это современный подход к постановке работающих целей.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              SizedBox(
+                height: marginMessage,
+              ),
+              Text(
+                "    Достижение цели состоит из двух этапов: первый - формулирование и осознание требуемой задачи, второй - стремление к выполнению вашей цели. Технология SMART помогает выполнить первый этап, ведь без правильной постановки цели достичь её практически невозможно.",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(
+                height: marginCardContent,
+              ),
+              Text(
+                "    Система постановки smart — целей позволяет на этапе целеполагания обобщить всю имеющуюся информацию, установить приемлемые сроки работы, определить достаточность ресурсов, предоставляя ясные, точные, конкретные задачи.\r\n\r\n\    SMART является аббревиатурой, расшифровка которой: Specific, Measurable, Achievable, Relevant, Time bound. Каждая буква аббревиатуры SMART означает критерий эффективности поставленных целей.",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(
+                height: marginCardContent,
+              ),
+              Column(
+                children: [
+                  smartInfoItem(
+                      context, blueContrast, 'SPECIFIC', 'конкретика'),
+                  smartInfoItem(
+                      context, lightBlueContrast, 'MEASURABLE', 'измеримость'),
+                  smartInfoItem(
+                      context, greenContrast, 'ACHIEVABLE', 'достижимость'),
+                  smartInfoItem(
+                      context, yellowContrast, 'RELEVANT', 'актуальность'),
+                  smartInfoItem(context, orangeContrast, 'TIME BOUND',
+                      'ограничения во времени'),
+                ],
+              ),
+              SizedBox(height: marginCardContent * 2),
+              Text(
+                "    Цель - законченное предложение. Каждое слово в нём разбирается на простые и понятные составляющие. Каждая буква наделена смыслом, и, вот секрет, пока не удастся проникнуться сутью каждого термина, система смарт для постановки цели работать не будет. Или плохо справится со своей функцией.",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        //bottom navigation bar on scaffold
+        color: backgroungMainWhiteColor,
+        shape: CircularNotchedRectangle(), //shape of notch
+        notchMargin:
+            0, //notche margin between floating button and bottom appbar
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          child: Row(
+            //children inside bottom appbar
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              button(context, "Назад", lightBlue),
+              button(context, "Создать цель", grassGreen),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget button(BuildContext context, String text, Color color) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shadowColor: Colors.transparent,
+        minimumSize: Size(50, 29),
+        primary: color,
+        onPrimary: Colors.transparent,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(25))),
+        elevation: 0,
+      ),
+      onPressed: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+        if (text == "Назад")
+          Navigator.pop(context, null);
+        else if (text == "Создать цель") toAddTargetPage(context);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: (color == whiteGrey) ? mainShadowColor : whiteColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
     );
   }

@@ -1,14 +1,8 @@
 import 'package:albina/constants.dart';
-import 'package:albina/main.dart';
-import 'package:albina/pages/screens/QrCode.dart';
-import 'package:albina/modules/lifeBalance.dart';
-import 'package:albina/pages/screens/mainScreen.dart';
-import 'package:albina/pages/screens/modules.dart';
 import 'package:albina/services/gradientBoxBorder.dart';
 import 'package:albina/services/gradientIconMask.dart';
 import 'package:albina/navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 @override
 Widget noAppBar() {

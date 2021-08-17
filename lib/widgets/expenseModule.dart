@@ -1,16 +1,8 @@
 import 'package:albina/constants.dart';
-import 'package:albina/modules/cash.dart';
 import 'package:albina/navigation.dart';
 import 'package:albina/widgets/expenseListItem.dart';
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-import '../constants.dart';
-import '../constants.dart';
-import '../constants.dart';
-import '../constants.dart';
-import '../constants.dart';
-import '../constants.dart';
 
 class Expense extends StatefulWidget {
   Expense({Key key}) : super(key: key);

@@ -1,5 +1,4 @@
 import 'package:albina/navigation.dart';
-import 'package:albina/templates/NavBar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:albina/constants.dart';
@@ -94,7 +93,9 @@ class _AddTargetPageState extends State<AddTargetPage> {
       ),
       onPressed: () {
         FocusScope.of(context).requestFocus(new FocusNode());
-        if (text == "Далее")
+        if (text == "Отмена")
+          toModulesPage(context, 2);
+        else if (text == "Далее")
           carouselController.nextPage();
         else if (text == "Назад")
           carouselController.previousPage();
@@ -181,10 +182,9 @@ class _AddTargetPageState extends State<AddTargetPage> {
                     cursorColor: lightBlue,
                     decoration: InputDecoration(
                       labelText: _getLebel(),
-                      labelStyle: TextStyle(color: lightBlue, fontSize:14),
+                      labelStyle: TextStyle(color: lightBlue, fontSize: 14),
                       focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: lightBlue, width: 2.0),
+                        borderSide: BorderSide(color: lightBlue, width: 2.0),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: lightBlue, width: 1.0),

@@ -1,5 +1,5 @@
-import 'package:albina/pages/screens/QrCode.dart';
 import 'package:albina/modules/lifeBalance.dart';
+import 'package:albina/pages/screens/QrCode.dart';
 import 'package:albina/pages/screens/mainScreen.dart';
 import 'package:albina/pages/screens/modules.dart';
 import 'package:albina/widgets/addTargetPage.dart';

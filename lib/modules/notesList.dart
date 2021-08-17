@@ -130,6 +130,5 @@ class _NotesListState extends State<NotesList> {
 
 @override
 Widget build(BuildContext context) {
-  // TODO: implement build
   throw UnimplementedError();
 }

@@ -1,8 +1,4 @@
 import 'package:albina/constants.dart';
-import 'package:albina/modules/notesList.dart';
-import 'package:albina/templates/NavBar.dart';
-import 'package:albina/services/gradientBoxBorder.dart';
-import 'package:albina/services/gradientIconMask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -23,7 +19,6 @@ class _LifeBalanceScreenState extends State<LifeBalanceScreen> {
     super.initState();
   }
 
-  @override
   Widget lifeBalanceSection(Color color, String text, bool isRow) {
     return Container(
       width: (isRow)
