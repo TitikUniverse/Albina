@@ -269,7 +269,7 @@ Widget bottomNavBar(context, {int tabId}) {
                       ),
                     ),
                     onPressed: () {
-                      
+                      toTaskManagerPage(context, false, null);
                     },
                   ),
                 ),
@@ -283,7 +283,9 @@ Widget bottomNavBar(context, {int tabId}) {
               splashRadius: 30,
               splashColor: IcoSplashColor50,
               highlightColor: IcoSplashColor50,
-              onPressed: () {},
+              onPressed: () {
+                toAssistantChat(context);
+              },
               icon: Container(
                 width: 46,
                 height: 46,

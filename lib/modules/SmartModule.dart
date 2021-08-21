@@ -23,7 +23,10 @@ class _SmartTargetState extends State<SmartTarget> {
     return result;
   }
 
-  Widget smartCard(text, date) {
+  int currentId = 0;
+  int delSphereId = null;
+
+  Widget smartCard(text, date, int typeId) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 35),
       padding: EdgeInsets.only(
@@ -115,114 +118,230 @@ class _SmartTargetState extends State<SmartTarget> {
     );
   }
 
+  _getBtnColor(sphereId) {
+    var color;
+    if (delSphereId == sphereId) {
+      color = softRed;
+    }
+    if (currentId == sphereId && delSphereId == null) {
+      color = lightBlue;
+    } else if (currentId != sphereId) {
+      color = whiteGrey;
+    }
+
+    return color;
+  }
+
+  Widget smartSphereBtn(String label, int sphereId) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shadowColor: Colors.transparent,
+          minimumSize: Size(50, 29),
+          primary: _getBtnColor(sphereId),
+          onPrimary: Colors.transparent,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(25))),
+          elevation: 0,
+        ),
+        onPressed: () {
+          setState(() {
+            if (delSphereId != sphereId) {
+              currentId = sphereId;
+              delSphereId = null;
+            }
+          });
+        },
+        onLongPress: () {
+          setState(() {
+            if(currentId == sphereId) delSphereId = sphereId;
+          });
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          child: Text(
+            label,
+            style: TextStyle(
+              color: (currentId == sphereId) ? whiteColor : mainShadowColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 25),
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Text(
-                'Мои цели SMART',
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 21,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  splashRadius: 18,
-                  splashColor: whiteGrey,
-                  highlightColor: Colors.transparent,
-                  icon: Icon(
-                    Icons.info_rounded,
-                    size: 25,
-                    color: whiteGrey,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          delSphereId = null;
+        });
+      },
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 25),
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Text(
+                  'Мои цели SMART',
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 21,
+                    fontWeight: FontWeight.w800,
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => FullScreenDialog(),
-                        fullscreenDialog: true,
-                      ),
-                    );
-                  },
                 ),
-              ),
-            ],
-          ),
-          Spacer(),
-          Spacer(),
-          CarouselSlider(
-            options: CarouselOptions(
-              height: 370,
-              viewportFraction: 0.8,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 8),
-              autoPlayAnimationDuration: Duration(milliseconds: 1200),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              pauseAutoPlayOnTouch: true,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-            ),
-            items: [
-              smartCard(
-                  'По истечении 5 лет занимать 40% доли рынка г. Новосибирск по продаже чая.',
-                  '01.01.2026'),
-              smartCard(
-                  'Купить квартиру не дороже 3 млн.руб. в районе своего вуза к концу 4 курса, чтобы переехать от родителей.',
-                  '25.05.2023'),
-              smartCard(
-                  'Внедрить CRM-систему “Мегаплан” в отдел продаж к 10 сентября 2022 г. для автоматизации процессов и контроля.',
-                  '10.09.2022'),
-            ],
-          ),
-          Spacer(),
-          SizedBox(
-            height: 55,
-            width: 55,
-            child: ElevatedButton(
-              onPressed: () {
-                toAddTargetPage(context);
-              },
-              style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  primary: Colors.blue,
-                  shadowColor: Colors.transparent,
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50))),
-              child: Ink(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.centerRight,
-                      colors: [lightBlue, seaWave],
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    splashRadius: 18,
+                    splashColor: whiteGrey,
+                    highlightColor: Colors.transparent,
+                    icon: Icon(
+                      Icons.info_rounded,
+                      size: 25,
+                      color: whiteGrey,
                     ),
-                    borderRadius: BorderRadius.circular(50)),
-                child: Container(
-                  width: 55,
-                  height: 55,
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.add_rounded,
-                    color: Colors.white,
-                    size: 31,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => FullScreenDialog(),
+                          fullscreenDialog: true,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width -
+                      65 -
+                      marginCardContent,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          width: 17.0,
+                        ),
+                        smartSphereBtn('Личное', 0),
+                        smartSphereBtn('Работа', 1),
+                        smartSphereBtn('FlatPlanet', 2),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.only(right: 25),
+                  child: Ink(
+                    height: 40,
+                    width: 40,
+                    decoration: const ShapeDecoration(
+                      color: whiteGrey,
+                      shape: CircleBorder(),
+                    ),
+                    child: IconButton(
+                      splashRadius: 25,
+                      icon: const Icon(
+                        Icons.add_rounded,
+                        size: 25,
+                      ),
+                      color: mainShadowColor,
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AddSphereDialog();
+                            });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Spacer(),
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 370,
+                viewportFraction: 0.8,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 8),
+                autoPlayAnimationDuration: Duration(milliseconds: 1200),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                pauseAutoPlayOnTouch: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              ),
+              items: [
+                smartCard(
+                    'По истечении 5 лет занимать 40% доли рынка г. Новосибирск по продаже чая.',
+                    '01.01.2026',
+                    1),
+                smartCard(
+                    'Купить квартиру не дороже 3 млн.руб. в районе своего вуза к концу 4 курса, чтобы переехать от родителей.',
+                    '25.05.2023',
+                    2),
+                smartCard(
+                    'Внедрить CRM-систему “Мегаплан” в отдел продаж к 10 сентября 2022 г. для автоматизации процессов и контроля.',
+                    '10.09.2022',
+                    3),
+              ],
+            ),
+            Spacer(),
+            SizedBox(
+              height: 55,
+              width: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  toAddTargetPage(context);
+                },
+                style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    primary: Colors.blue,
+                    shadowColor: Colors.transparent,
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50))),
+                child: Ink(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.centerRight,
+                        colors: [lightBlue, seaWave],
+                      ),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Container(
+                    width: 55,
+                    height: 55,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.add_rounded,
+                      color: Colors.white,
+                      size: 31,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Spacer(),
-        ],
+            Spacer(),
+          ],
+        ),
       ),
     );
   }
@@ -410,6 +529,78 @@ class FullScreenDialog extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AddSphereDialog extends StatefulWidget {
+  AddSphereDialog({Key key}) : super(key: key);
+
+  @override
+  _AddSphereDialogState createState() => _AddSphereDialogState();
+}
+
+class _AddSphereDialogState extends State<AddSphereDialog> {
+  TextEditingController addExpense = new TextEditingController();
+  TextEditingController expenseTarget = new TextEditingController();
+  DateTime expenseDate;
+
+  void _selectDateExpence() async {
+    DateTime expense = await showDatePicker(
+      context: context,
+      initialDate: new DateTime.now(),
+      firstDate: new DateTime.now().subtract(new Duration(days: 30)),
+      lastDate: new DateTime.now().add(new Duration(days: 30)),
+    );
+
+    setState(() {
+      expenseDate = expense;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25)),
+      ),
+      backgroundColor: backgroungMainWhiteColor,
+      child: Container(
+        width: MediaQuery.of(context).size.width - 50,
+        height: 180,
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: addExpense,
+              style: TextStyle(
+                fontSize: 18,
+                color: textColor,
+                fontWeight: FontWeight.w500,
+              ),
+              decoration: InputDecoration(
+                hintText: "Название категории",
+                hintStyle: TextStyle(
+                  color: mainShadowColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Spacer(),
+            IconButton(
+                color: indigo,
+                splashRadius: 30,
+                icon: Icon(
+                  Icons.done_rounded,
+                  color: mainShadowColor,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                })
+          ],
         ),
       ),
     );
