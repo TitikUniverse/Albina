@@ -128,9 +128,11 @@ class _TaskManagerState extends State<TaskManager> {
           ),
         ),
       );
-    } else if (isSmartTask != false && smartTaskId != null) {
+    } else if (isSmartTask != false) {
       return SingleChildScrollView(
-        child: Text('Task'),
+        child: TaskItem(
+          taskId: 1,
+        ),
       );
     }
   }

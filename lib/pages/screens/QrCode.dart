@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:albina/models/expenseModel.dart';
 import 'package:albina/navigation.dart';
 import 'package:albina/widgets/qrAddExpense.dart';
 import 'package:flutter/scheduler.dart';
@@ -209,20 +210,17 @@ class _QrScanScreenState extends State<QrScanScreen> {
         var hour = st.substring(9, 11);
         var min = st.substring(11, 13);
 
+        var expenseModel = new ExpenseModel(summ, day, month, year, hour, min);
+
         controller.pauseCamera();
         data = null;
-        toQrAddExpense(context, summ, day, month, year, hour, min);
+        toQrAddExpense(context, expenseModel);
         Navigator.push(
             context,
             PageTransition(
                 type: PageTransitionType.fade,
                 child: AddQrExpense(
-                  summ: summ,
-                  day: day,
-                  hour: hour,
-                  min: min,
-                  month: month,
-                  year: year,
+                  expenseModel:expenseModel
                 )));
       } else {
         data = result.code;

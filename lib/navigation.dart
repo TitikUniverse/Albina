@@ -36,18 +36,13 @@ void toQrScanScreen(context) {
       PageTransition(type: PageTransitionType.fade, child: QrScanScreen()));
 }
 
-void toQrAddExpense(context, summ, day, month, year, hour, min) {
+void toQrAddExpense(context, expenseModel) {
   Navigator.push(
       context,
       PageTransition(
           type: PageTransitionType.fade,
           child: AddQrExpense(
-            summ: summ,
-            day: day,
-            hour: hour,
-            min: min,
-            month: month,
-            year: year,
+            expenseModel: expenseModel
           )));
 }
 

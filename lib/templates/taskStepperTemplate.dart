@@ -82,7 +82,7 @@ class _TaskItemState extends State<TaskItem> {
                 ),
               ),
               Chip(
-                backgroundColor: lightBlue50,
+                backgroundColor: (taskId <= 3) ? lightBlue50: seaWave50,
                 label: (taskId <= 3) ? Text('Личное') : Text('Работа'),
                 labelStyle: TextStyle(fontSize: 16, color: whiteColor),
               ),

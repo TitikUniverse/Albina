@@ -348,7 +348,9 @@ class _MainScreenState extends State<MainScreen> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(25.0)),
                                   splashColor: Colors.blue.withAlpha(30),
-                                  onTap: () {},
+                                  onTap: () {
+                                    toTaskManagerPage(context, false, null);
+                                  },
                                   child: Container(
                                     padding: EdgeInsets.all(10),
                                     width: MediaQuery.of(context).size.width,

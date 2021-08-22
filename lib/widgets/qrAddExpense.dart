@@ -1,4 +1,5 @@
 import 'package:albina/constants.dart';
+import 'package:albina/models/expenseModel.dart';
 import 'package:albina/navigation.dart';
 import 'package:albina/templates/NavBar.dart';
 import 'package:flutter/material.dart';
@@ -7,33 +8,24 @@ import 'package:intl/intl.dart';
 class AddQrExpense extends StatefulWidget {
   AddQrExpense({
     Key key,
-    this.summ,
-    this.day,
-    this.month,
-    this.year,
-    this.hour,
-    this.min,
+    this.expenseModel,
   }) : super(key: key);
 
-  final String summ;
-  final String year;
-  final String day;
-  final String month;
-  final String hour;
-  final String min;
+  final ExpenseModel expenseModel;
+
   @override
   _AddQrExpenseState createState() => _AddQrExpenseState();
 }
 
 class _AddQrExpenseState extends State<AddQrExpense> {
-  int selectedPurpose = 0;
+
   TextEditingController expenseTarget = new TextEditingController();
   DateTime expenseDate;
 
   @override
   Widget build(BuildContext context) {
     expenseDate = DateFormat('dd.MM.yyyy HH:mm').parse(
-        '${widget.day}.${widget.month}.${widget.year} ${widget.hour}:${widget.min}');
+        '${widget.expenseModel.day}.${widget.expenseModel.month}.${widget.expenseModel.year} ${widget.expenseModel.hour}:${widget.expenseModel.min}');
     return Scaffold(
       backgroundColor: backgroungMainWhiteColor,
       extendBodyBehindAppBar: false,
@@ -56,7 +48,7 @@ class _AddQrExpenseState extends State<AddQrExpense> {
             Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Сумма: ' + widget.summ,
+                'Сумма: ' + widget.expenseModel.summ,
                 style: TextStyle(
                   color: mainShadowColor,
                   fontSize: 18,
