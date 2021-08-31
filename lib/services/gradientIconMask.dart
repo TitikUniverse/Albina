@@ -11,7 +11,7 @@ class MenuGradientMask extends StatelessWidget {
       shaderCallback: (bounds) => LinearGradient(
         begin: Alignment.bottomLeft,
         end: Alignment.centerRight,
-        colors: [darkBlue, indigo],
+        colors: [lightBlue, lightBlue],
         tileMode: TileMode.mirror,
       ).createShader(bounds),
       child: child,

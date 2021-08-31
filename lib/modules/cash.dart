@@ -24,7 +24,7 @@ class _CashViewState extends State<CashView> {
           children: [
             Expense(),
             Income(),
-            CashAnalitics(),
+            // CashAnalitics(),
           ],
         ),
     );

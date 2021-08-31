@@ -12,6 +12,17 @@ class Income extends StatefulWidget {
 class _IncomeState extends State<Income> {
   Widget actionsToolBar() {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        boxShadow: [
+          BoxShadow(
+            color: mainShadowColor,
+            offset: const Offset(0.0, 0.0),
+            blurRadius: 6.0,
+            spreadRadius: 0.07,
+          )
+        ],
+      ),
       child: SizedBox(
         height: 55,
         width: 55,
@@ -25,26 +36,21 @@ class _IncomeState extends State<Income> {
           },
           style: ElevatedButton.styleFrom(
               elevation: 0,
-              primary: Colors.blue,
+              primary: Colors.transparent,
               shadowColor: Colors.transparent,
               padding: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50))),
           child: Ink(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.centerRight,
-                  colors: [lightBlue, seaWave],
-                ),
-                borderRadius: BorderRadius.circular(50)),
+                color: whiteColor, borderRadius: BorderRadius.circular(50)),
             child: Container(
               width: 55,
               height: 55,
               alignment: Alignment.center,
               child: Icon(
                 Icons.add_rounded,
-                color: Colors.white,
+                color: lightBlue,
                 size: 31,
               ),
             ),
@@ -66,16 +72,13 @@ class _IncomeState extends State<Income> {
             height: 200,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(25.0)),
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.centerRight,
-                  colors: [lightBlue, seaWave]),
+              color: whiteColor,
               boxShadow: [
                 BoxShadow(
                   color: mainShadowColor,
                   offset: const Offset(0.0, 0.0),
-                  blurRadius: 10.0,
-                  spreadRadius: 0.1,
+                  blurRadius: 5.0,
+                  spreadRadius: 0.07,
                 )
               ],
             ),
@@ -90,13 +93,13 @@ class _IncomeState extends State<Income> {
                       Text(
                         'Мой кошелёк',
                         style: TextStyle(
-                            color: whiteColor,
+                            color: lightBlue,
                             fontSize: 18,
                             fontWeight: FontWeight.w800),
                       ),
                       Icon(
                         Icons.credit_card_rounded,
-                        color: Colors.white,
+                        color: lightBlue,
                         size: 31,
                       ),
                     ],
@@ -106,7 +109,7 @@ class _IncomeState extends State<Income> {
                 Text(
                   '****  ****  ****  ****',
                   style: TextStyle(
-                      color: whiteColor,
+                      color: lightBlue,
                       fontSize: 26,
                       fontWeight: FontWeight.w800),
                 ),
@@ -116,7 +119,7 @@ class _IncomeState extends State<Income> {
                   child: Text(
                     '21 000 ₽',
                     style: TextStyle(
-                        color: whiteColor,
+                        color: lightBlue,
                         fontSize: 26,
                         fontWeight: FontWeight.w800),
                   ),
@@ -135,14 +138,14 @@ class _IncomeState extends State<Income> {
                   child: Text(
                     "Последние доходы",
                     style: TextStyle(
-                      color: textColor,
+                      color: mainGrey,
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      fontWeight: FontWeight.w500,
+                    ), 
                   ),
                 ),
                 Container(
-                  constraints: BoxConstraints(minHeight: 176, maxHeight: 176),
+                  constraints: BoxConstraints(maxHeight: 176),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -155,34 +158,20 @@ class _IncomeState extends State<Income> {
                             purpose: 'Зарплата',
                             date: '03.08.21'),
                         IncomeListItem(
-                            income: '120',
-                            purpose: 'Прочее',
-                            date: '02.08.21'),
+                            income: '120', purpose: 'Прочее', date: '02.08.21'),
                       ],
                     ),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.zero,
-                  alignment: Alignment.centerLeft,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shadowColor: Colors.transparent,
-                      minimumSize: Size(50, 29),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 7, horizontal: 12),
-                      primary: whiteGrey,
-                      onPrimary: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(25))),
-                      elevation: 0,
-                    ),
-                    onPressed: () {},
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(top: 12.0, bottom: 5.0),
+                  child: GestureDetector(
+                    onTap: () {},
                     child: const Text(
                       'Показать все',
                       style: TextStyle(
-                        color: mainShadowColor,
+                        color: mainGrey,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -233,7 +222,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(25)),
+        borderRadius: BorderRadius.all(Radius.circular(18.0)),
       ),
       backgroundColor: backgroungMainWhiteColor,
       child: Container(
@@ -252,7 +241,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
               decoration: InputDecoration(
                 hintText: "Сумма дохода",
                 hintStyle: TextStyle(
-                  color: mainShadowColor,
+                  color: mainGrey,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -266,7 +255,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
               child: Text(
                 'Источник дохода:',
                 style: TextStyle(
-                  color: mainShadowColor,
+                  color: mainGrey,
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -283,7 +272,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                     shadowColor: Colors.transparent,
                     minimumSize: Size(50, 29),
                     padding: EdgeInsets.symmetric(vertical: 7, horizontal: 12),
-                    primary: (selectedPurpose == 1) ? seaWave50 : whiteGrey,
+                    primary: (selectedPurpose == 1) ? lightBlue : mainGrey,
                     onPrimary: Colors.transparent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25))),
@@ -297,7 +286,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                   child: const Text(
                     'Зарплата',
                     style: TextStyle(
-                      color: mainShadowColor,
+                      color: whiteColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -308,7 +297,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                     shadowColor: Colors.transparent,
                     minimumSize: Size(50, 29),
                     padding: EdgeInsets.symmetric(vertical: 7, horizontal: 12),
-                    primary: (selectedPurpose == 2) ? seaWave50 : whiteGrey,
+                    primary: (selectedPurpose == 2) ? lightBlue : mainGrey,
                     onPrimary: Colors.transparent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25))),
@@ -322,7 +311,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                   child: const Text(
                     'Перевод',
                     style: TextStyle(
-                      color: mainShadowColor,
+                      color: whiteColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -333,7 +322,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                     shadowColor: Colors.transparent,
                     minimumSize: Size(50, 29),
                     padding: EdgeInsets.symmetric(vertical: 7, horizontal: 12),
-                    primary: (selectedPurpose == 3) ? seaWave50 : whiteGrey,
+                    primary: (selectedPurpose == 3) ? lightBlue : mainGrey,
                     onPrimary: Colors.transparent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25))),
@@ -347,7 +336,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                   child: const Text(
                     'Прочее',
                     style: TextStyle(
-                      color: mainShadowColor,
+                      color: whiteColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -358,7 +347,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                     shadowColor: Colors.transparent,
                     minimumSize: Size(29, 29),
                     padding: EdgeInsets.symmetric(vertical: 7, horizontal: 12),
-                    primary: (selectedPurpose == 4) ? seaWave50 : whiteGrey,
+                    primary: (selectedPurpose == 4) ? lightBlue : mainGrey,
                     onPrimary: Colors.transparent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25))),
@@ -372,7 +361,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                   child: const Text(
                     '+',
                     style: TextStyle(
-                      color: mainShadowColor,
+                      color: whiteColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -389,7 +378,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                 shadowColor: Colors.transparent,
                 minimumSize: Size(50, 29),
                 padding: EdgeInsets.all(5),
-                primary: (expenseDate == null) ? whiteGrey : seaWave50,
+                primary: Colors.transparent,
                 onPrimary: Colors.transparent,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(25))),
@@ -401,7 +390,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                 children: [
                   Icon(
                     Icons.date_range_rounded,
-                    color: mainShadowColor,
+                    color: mainGrey,
                     size: 27,
                   ),
                   SizedBox(
@@ -413,7 +402,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                         ? 'Выбор даты'
                         : "${expenseDate.day}.${expenseDate.month}.${expenseDate.year}",
                     style: TextStyle(
-                      color: mainShadowColor,
+                      color: mainGrey,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -426,11 +415,10 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
             ),
             Spacer(),
             IconButton(
-                color: indigo,
                 splashRadius: 30,
                 icon: Icon(
                   Icons.done_rounded,
-                  color: mainShadowColor,
+                  color: mainGrey,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -452,7 +440,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
       decoration: InputDecoration(
         hintText: "Другое",
         hintStyle: TextStyle(
-          color: mainShadowColor,
+          color: mainGrey,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),

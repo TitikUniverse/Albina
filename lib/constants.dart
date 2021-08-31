@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 
 const Color textColor = Color(0xFF121212);
+const Color mainGrey = Color(0xFF6f6e6e);
 const Color backgroungMainWhiteColor = Color(0xFFF7F7F7);
 const Color whiteColor = Colors.white;
-const Color mainShadowColor = Color(0xAA7F7F7F);
+const Color mainShadowColor = Color(0x807F7F7F);
 const Color whiteGrey =
     Color(0xffe6e6e6); //Немного контрастный декортаивный блок на белом фоне (ползунок у slide)
 const Color darkBlue = Color(0xFF055390);
-const Color lightBlue = Color(0xFF0094C1);
+const Color lightBlue = Color(0xFF0096c7);
 const Color seaWave = Color(0xFF51D2C2);
-const Color lightBlue50 = Color(0x800094C1);
+const Color lightBlue50 = Color(0x800096c7);
 const Color seaWave50 = Color(0x8051D2C2);
 const Color textColorDark = Color(0xFF353535);
 const Color indigo = Color(0xFF1EACC1);
 const Color softRed = Color(0xFFFF9C9C);
-const Color grassGreen = Color(0xFF5CB575);
+const Color grassGreen = Color(0xFF1b7859);
 
 const Color assistantShadow = Color(0xFF38e8bc);
 const Color IcoSplashColor50 = Color(0x80b3fff5);
 const Color greenIndiator = Color(0xFF32ff00);
+const Color secondIndicator = Color(0xFF17bee0);
 
 const double marginMessage = 18.0;
 const double marginCardContent = 8.0;
