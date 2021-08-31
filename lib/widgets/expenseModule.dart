@@ -1,8 +1,8 @@
 import 'package:albina/constants.dart';
 import 'package:albina/navigation.dart';
 import 'package:albina/widgets/expenseListItem.dart';
+import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
-
 
 class Expense extends StatefulWidget {
   Expense({Key key}) : super(key: key);
@@ -35,175 +35,105 @@ class _ExpenseState extends State<Expense> {
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.all(7),
-          height: 140,
+          height: 160,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(25.0)),
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [lightBlue, seaWave]),
+            color: whiteColor,
+            boxShadow: [
+              BoxShadow(
+                color: mainShadowColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 6.0,
+                spreadRadius: 0.07,
+              )
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  'Лимиты',
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: 21,
-                    fontWeight: FontWeight.w800,
-                  ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  onPrimary: lightBlue50,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0))),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        'День',
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.shopping_bag_rounded,
+                      color: lightBlue,
+                      size: 31,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 5.0),
+                      child: Text(
+                        'Лимиты',
                         style: TextStyle(
-                          color: whiteColor,
+                          color: lightBlue,
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      Text(
-                        '${moneyPerDay.toString()}₽',
-                        style: TextStyle(
-                          color: whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        'Месяц',
-                        style: TextStyle(
-                          color: whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      Text(
-                        '${moneyPerMonth.toString()}₽',
-                        style: TextStyle(
-                          color: whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: indigo,
-                      offset: const Offset(0.0, 0.0),
-                      blurRadius: 7.0,
-                      spreadRadius: 1.0,
-                    )
+                    ),
                   ],
                 ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.transparent,
-                    minimumSize: Size(50, 29),
-                    // padding: EdgeInsets.all(1),
-                    primary: lightBlue,
-                    onPrimary: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
-                    elevation: 0,
-                  ),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                            ),
-                            backgroundColor: backgroungMainWhiteColor,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width - 50,
-                              height: 250,
-                              padding: const EdgeInsets.all(25),
-                              child: Column(
-                                children: <Widget>[
-                                  TextField(
-                                    controller: dayLimitTextController,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: textColor,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    decoration: InputDecoration(
-                                      hintText: "Дневной лимит",
-                                      hintStyle: TextStyle(
-                                        color: mainShadowColor,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: marginMessage,
-                                  ),
-                                  TextField(
-                                    controller: monthLimitTextController,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: textColor,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    decoration: InputDecoration(
-                                      hintText: "Месячный лимит",
-                                      hintStyle: TextStyle(
-                                        color: mainShadowColor,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  IconButton(
-                                      color: indigo,
-                                      splashRadius: 30,
-                                      icon: Icon(
-                                        Icons.done_rounded,
-                                        color: mainShadowColor,
-                                      ),
-                                      onPressed: () {
-                                        bool result = _saveNewLimits();
-                                        if (result == true)
-                                          Navigator.pop(context);
-                                      })
-                                ],
-                              ),
-                            ),
-                          );
-                        });
-                  },
-                  child: const Text(
-                    'Изменить',
-                    style: TextStyle(
-                      color: whiteColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  onPrimary: lightBlue50,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0))),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.today_rounded,
+                      color: lightBlue,
+                      size: 31,
                     ),
-                  ),
+                    Text(
+                      'Планирование',
+                      style: TextStyle(
+                        color: lightBlue,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  onPrimary: lightBlue50,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0))),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.view_list_rounded,
+                      color: lightBlue,
+                      size: 31,
+                    ),
+                    Text(
+                      'Мои категории',
+                      style: TextStyle(
+                        color: lightBlue,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -219,78 +149,97 @@ class _ExpenseState extends State<Expense> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: 55,
-            width: 55,
-            child: ElevatedButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AddExpenceDialog();
-                    });
-              },
-              style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  primary: Colors.blue,
-                  shadowColor: Colors.transparent,
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50))),
-              child: Ink(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.centerRight,
-                      colors: [lightBlue, seaWave],
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: [
+                BoxShadow(
+                  color: mainShadowColor,
+                  offset: const Offset(0.0, 0.0),
+                  blurRadius: 6.0,
+                  spreadRadius: 0.07,
+                )
+              ],
+            ),
+            child: SizedBox(
+              height: 55,
+              width: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        return AddExpenceDialog();
+                      });
+                },
+                style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    primary: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50))),
+                child: Ink(
+                  decoration: BoxDecoration(
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Container(
+                    width: 55,
+                    height: 55,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.add_rounded,
+                      color: lightBlue,
+                      size: 31,
                     ),
-                    borderRadius: BorderRadius.circular(50)),
-                child: Container(
-                  width: 55,
-                  height: 55,
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.add_rounded,
-                    color: Colors.white,
-                    size: 31,
                   ),
                 ),
               ),
             ),
           ),
           SizedBox(
-            height: marginCardContent,
+            height: 15.0,
           ),
-          SizedBox(
-            height: 55,
-            width: 55,
-            child: ElevatedButton(
-              onPressed: () {
-                toQrScanScreen(context);
-              },
-              style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  primary: Colors.blue,
-                  shadowColor: Colors.transparent,
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50))),
-              child: Ink(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.centerRight,
-                      colors: [lightBlue, seaWave],
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: [
+                BoxShadow(
+                  color: mainShadowColor,
+                  offset: const Offset(0.0, 0.0),
+                  blurRadius: 6.0,
+                  spreadRadius: 0.07,
+                )
+              ],
+            ),
+            child: SizedBox(
+              height: 55,
+              width: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  toQrScanScreen(context);
+                },
+                style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    primary: Colors.blue,
+                    shadowColor: Colors.transparent,
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50))),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Container(
+                    width: 55,
+                    height: 55,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.qr_code_scanner_rounded,
+                      color: lightBlue,
+                      size: 31,
                     ),
-                    borderRadius: BorderRadius.circular(50)),
-                child: Container(
-                  width: 55,
-                  height: 55,
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.qr_code_scanner_rounded,
-                    color: Colors.white,
-                    size: 31,
                   ),
                 ),
               ),
@@ -319,17 +268,14 @@ class _ExpenseState extends State<Expense> {
                       width: MediaQuery.of(context).size.width / 2 - 30,
                       height: 185,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.centerRight,
-                            colors: [darkBlue, lightBlue]),
+                        borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                        color: whiteColor,
                         boxShadow: [
                           BoxShadow(
                             color: mainShadowColor,
                             offset: const Offset(0.0, 0.0),
-                            blurRadius: 10.0,
-                            spreadRadius: 0.1,
+                            blurRadius: 6.0,
+                            spreadRadius: 0.07,
                           )
                         ],
                       ),
@@ -339,9 +285,9 @@ class _ExpenseState extends State<Expense> {
                           Text(
                             "Сегодня",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontSize: 21,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                           SizedBox(
@@ -351,8 +297,8 @@ class _ExpenseState extends State<Expense> {
                             alignment: Alignment.center,
                             children: <Widget>[
                               Icon(
-                                Icons.payments_rounded,
-                                color: Colors.white,
+                                Icons.account_balance_wallet_rounded,
+                                color: lightBlue,
                                 size: 31,
                               ),
                               SizedBox(
@@ -361,9 +307,9 @@ class _ExpenseState extends State<Expense> {
                                 child: CircularProgressIndicator(
                                   value: 0.82,
                                   strokeWidth: 4.5,
-                                  backgroundColor: Colors.white,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      greenIndiator),
+                                  backgroundColor: whiteGrey,
+                                  valueColor:
+                                      AlwaysStoppedAnimation<Color>(lightBlue),
                                 ),
                               ),
                             ],
@@ -374,7 +320,7 @@ class _ExpenseState extends State<Expense> {
                           Text(
                             "850₽",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -387,29 +333,25 @@ class _ExpenseState extends State<Expense> {
                       width: MediaQuery.of(context).size.width / 2 - 30,
                       height: 185,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.centerRight,
-                            colors: [lightBlue, seaWave]),
+                        borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                        color: whiteColor,
                         boxShadow: [
                           BoxShadow(
-                            color: mainShadowColor,
-                            offset: const Offset(0.0, 0.0),
-                            blurRadius: 10.0,
-                            spreadRadius: 0.1,
-                          )
+                              color: mainShadowColor,
+                              offset: const Offset(0.0, 0.0),
+                              blurRadius: 7.0,
+                              spreadRadius: 0.07)
                         ],
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            "Этот месяц",
+                            "Сегодня",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontSize: 21,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                           SizedBox(
@@ -420,18 +362,18 @@ class _ExpenseState extends State<Expense> {
                             children: <Widget>[
                               Icon(
                                 Icons.payments_rounded,
-                                color: Colors.white,
+                                color: lightBlue,
                                 size: 31,
                               ),
                               SizedBox(
                                 height: 60,
                                 width: 60,
                                 child: CircularProgressIndicator(
-                                  value: 0.68,
+                                  value: 0.52,
                                   strokeWidth: 4.5,
-                                  backgroundColor: Colors.white,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      greenIndiator),
+                                  backgroundColor: whiteGrey,
+                                  valueColor:
+                                      AlwaysStoppedAnimation<Color>(lightBlue),
                                 ),
                               ),
                             ],
@@ -440,9 +382,9 @@ class _ExpenseState extends State<Expense> {
                             height: marginCardContent,
                           ),
                           Text(
-                            "13650₽",
+                            "13 650₽",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -459,50 +401,48 @@ class _ExpenseState extends State<Expense> {
                   child: Column(
                     children: [
                       Container(
+                        padding: EdgeInsets.only(bottom: 5),
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Последние расходы",
                           style: TextStyle(
-                            color: textColor,
+                            color: mainGrey,
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                       Container(
-                        constraints:
-                            BoxConstraints(minHeight: 176, maxHeight: 176),
+                        constraints: BoxConstraints(maxHeight: 176),
                         child: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
                           child: Column(
                             children: [
-                              ExpenseListItem(expense: '25', purpose: 'Проезд', date: '03.08.21'),
-                              ExpenseListItem(expense: '324', purpose: 'Кофе', date: '03.08.21'),
-                              ExpenseListItem(expense: '120', purpose: 'Прочее', date: '02.08.21'),
+                              ExpenseListItem(
+                                  expense: '25',
+                                  purpose: 'Проезд',
+                                  date: '03.08.21'),
+                              ExpenseListItem(
+                                  expense: '324',
+                                  purpose: 'Кофе',
+                                  date: '03.08.21'),
+                              ExpenseListItem(
+                                  expense: '120',
+                                  purpose: 'Прочее',
+                                  date: '02.08.21'),
                             ],
                           ),
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.zero,
-                        alignment: Alignment.centerLeft,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shadowColor: Colors.transparent,
-                            minimumSize: Size(50, 29),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 7, horizontal: 12),
-                            primary: whiteGrey,
-                            onPrimary: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25))),
-                            elevation: 0,
-                          ),
-                          onPressed: () {},
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(top: 12.0, bottom: 5.0),
+                        child: GestureDetector(
+                          onTap: () {},
                           child: const Text(
                             'Показать все',
                             style: TextStyle(
-                              color: mainShadowColor,
+                              color: mainGrey,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -543,10 +483,8 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
     DateTime expense = await showDatePicker(
       context: context,
       initialDate: new DateTime.now(),
-      firstDate: new DateTime.now()
-          .subtract(new Duration(days: 30)),
-      lastDate: new DateTime.now()
-          .add(new Duration(days: 30)),
+      firstDate: new DateTime.now().subtract(new Duration(days: 30)),
+      lastDate: new DateTime.now().add(new Duration(days: 30)),
     );
 
     setState(() {
@@ -554,30 +492,32 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
     });
   }
 
+  int selectedPurpose = 0;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(25)),
+        borderRadius: BorderRadius.all(Radius.circular(18.0)),
       ),
       backgroundColor: backgroungMainWhiteColor,
       child: Container(
-        width: MediaQuery.of(context).size.width - 50,
-        height: 320,
+        width: MediaQuery.of(context).size.width,
+        height: 450,
         padding: const EdgeInsets.all(25),
         child: Column(
           children: <Widget>[
             TextField(
               controller: addExpense,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: textColor,
                 fontWeight: FontWeight.w500,
               ),
               decoration: InputDecoration(
                 hintText: "Сумма расхода",
                 hintStyle: TextStyle(
-                  color: mainShadowColor,
+                  color: mainGrey,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -586,19 +526,569 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
             SizedBox(
               height: marginMessage,
             ),
-            TextField(
-              controller: expenseTarget,
-              style: TextStyle(
-                fontSize: 18,
-                color: textColor,
-                fontWeight: FontWeight.w500,
-              ),
-              decoration: InputDecoration(
-                hintText: "Предмет расхода",
-                hintStyle: TextStyle(
-                  color: mainShadowColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+            Container(
+              constraints: BoxConstraints(maxHeight: 220.0),
+              width: MediaQuery.of(context).size.width,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  children: [
+                    Card(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: ExpansionCard(
+                        margin: EdgeInsets.zero,
+                        borderRadius: 25.0,
+                        backgroundColor: whiteColor,
+                        title: Container(
+                          child: Text(
+                            "Общепит",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: textColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        children: <Widget>[
+                          Container(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                padding: EdgeInsets.all(5.0),
+                                constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width *
+                                            1.2),
+                                child: Wrap(
+                                  direction: Axis.horizontal,
+                                  alignment: WrapAlignment.start,
+                                  runAlignment: WrapAlignment.start,
+                                  spacing: 5.0,
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 1)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 1;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 2)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 2;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 3)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 3;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 4)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 4;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 5)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 5;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Card(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: ExpansionCard(
+                        margin: EdgeInsets.zero,
+                        borderRadius: 25.0,
+                        backgroundColor: whiteColor,
+                        title: Container(
+                          child: Text(
+                            "Общепит",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: textColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        children: <Widget>[
+                          Container(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                padding: EdgeInsets.all(5.0),
+                                constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width *
+                                            1.2),
+                                child: Wrap(
+                                  direction: Axis.horizontal,
+                                  alignment: WrapAlignment.start,
+                                  runAlignment: WrapAlignment.start,
+                                  spacing: 5.0,
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 1)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 1;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 2)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 2;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 3)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 3;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Card(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: ExpansionCard(
+                        margin: EdgeInsets.zero,
+                        borderRadius: 25.0,
+                        backgroundColor: whiteColor,
+                        title: Container(
+                          child: Text(
+                            "Общепит",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: textColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        children: <Widget>[
+                          Container(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                padding: EdgeInsets.all(5.0),
+                                constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width *
+                                            1.2),
+                                child: Wrap(
+                                  direction: Axis.horizontal,
+                                  alignment: WrapAlignment.start,
+                                  runAlignment: WrapAlignment.start,
+                                  spacing: 5.0,
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 1)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 1;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 2)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 2;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 3)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 3;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 4)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 4;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 5)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 5;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 6)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 6;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor: Colors.transparent,
+                                        minimumSize: Size(50, 29),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 12),
+                                        primary: (selectedPurpose == 7)
+                                            ? lightBlue
+                                            : mainGrey,
+                                        onPrimary: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedPurpose = 7;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Зарплата',
+                                        style: TextStyle(
+                                          color: whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -610,11 +1100,10 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
                 shadowColor: Colors.transparent,
                 minimumSize: Size(50, 29),
                 padding: EdgeInsets.all(5),
-                primary: (expenseDate == null) ? whiteGrey : seaWave50,
+                primary: Colors.transparent,
                 onPrimary: Colors.transparent,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(25))),
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
                 elevation: 0,
               ),
               child: Row(
@@ -623,19 +1112,24 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
                 children: [
                   Icon(
                     Icons.date_range_rounded,
-                    color: mainShadowColor,
+                    color: mainGrey,
                     size: 27,
                   ),
                   SizedBox(
                     width: 3,
                     height: 5,
                   ),
-                  Text(
-                    expenseDate == null ? 'Выбор даты' : "${expenseDate.day}.${expenseDate.month}.${expenseDate.year}",
-                    style: TextStyle(
-                      color: mainShadowColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                  Container(
+                    padding: EdgeInsets.only(top: 5.5),
+                    child: Text(
+                      expenseDate == null
+                          ? 'Выбор даты'
+                          : "${expenseDate.day}.${expenseDate.month}.${expenseDate.year}",
+                      style: TextStyle(
+                        color: mainGrey,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -650,7 +1144,7 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
                 splashRadius: 30,
                 icon: Icon(
                   Icons.done_rounded,
-                  color: mainShadowColor,
+                  color: mainGrey,
                 ),
                 onPressed: () {
                   Navigator.pop(context);

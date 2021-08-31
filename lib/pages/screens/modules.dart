@@ -30,6 +30,7 @@ class _ModulesScreenState extends State<ModulesScreen> {
       appBar: topMenuBtn(backgroungMainWhiteColor),
       body: Container(
         child: PageView(
+          physics: BouncingScrollPhysics(),
           controller: controller,
           scrollDirection: Axis.vertical,
           children: [

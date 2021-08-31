@@ -126,7 +126,7 @@ class _SmartTargetState extends State<SmartTarget> {
     if (currentId == sphereId && delSphereId == null) {
       color = lightBlue;
     } else if (currentId != sphereId) {
-      color = whiteGrey;
+      color = mainGrey;
     }
 
     return color;
@@ -155,7 +155,7 @@ class _SmartTargetState extends State<SmartTarget> {
         },
         onLongPress: () {
           setState(() {
-            if(currentId == sphereId) delSphereId = sphereId;
+            if (currentId == sphereId) delSphereId = sphereId;
           });
         },
         child: Padding(
@@ -163,7 +163,7 @@ class _SmartTargetState extends State<SmartTarget> {
           child: Text(
             label,
             style: TextStyle(
-              color: (currentId == sphereId) ? whiteColor : mainShadowColor,
+              color: whiteColor,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
@@ -244,22 +244,21 @@ class _SmartTargetState extends State<SmartTarget> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.zero,
-                  margin: EdgeInsets.only(right: 25),
-                  child: Ink(
-                    height: 40,
-                    width: 40,
-                    decoration: const ShapeDecoration(
-                      color: whiteGrey,
-                      shape: CircleBorder(),
-                    ),
-                    child: IconButton(
-                      splashRadius: 25,
-                      icon: const Icon(
-                        Icons.add_rounded,
-                        size: 25,
-                      ),
-                      color: mainShadowColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: mainShadowColor,
+                        offset: const Offset(0.0, 0.0),
+                        blurRadius: 6.0,
+                        spreadRadius: 0.07,
+                      )
+                    ],
+                  ),
+                  child: SizedBox(
+                    height: 55,
+                    width: 55,
+                    child: ElevatedButton(
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -267,6 +266,28 @@ class _SmartTargetState extends State<SmartTarget> {
                               return AddSphereDialog();
                             });
                       },
+                      style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          primary: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50))),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Container(
+                          width: 55,
+                          height: 55,
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Icons.add_rounded,
+                            color: lightBlue,
+                            size: 31,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),

@@ -19,13 +19,13 @@ class _MainScreenState extends State<MainScreen> {
           (isDone)
               ? Icons.check_circle_outline_rounded
               : Icons.highlight_off_rounded,
-          color: whiteColor,
+          color: lightBlue,
           size: 27,
         ),
         Text(
           title,
           style: TextStyle(
-            color: whiteColor,
+            color: textColor,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
@@ -106,21 +106,22 @@ class _MainScreenState extends State<MainScreen> {
       extendBodyBehindAppBar: false,
       appBar: noAppBar(),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.only(top: 50, right: 25, left: 25),
+          padding: const EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
           child: Column(
             children: [
               SearchAppBar(),
               Padding(
-                padding: const EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.only(top: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          width: MediaQuery.of(context).size.width / 2 - 25,
                           child: Column(
                             children: [
                               Card(
@@ -128,19 +129,25 @@ class _MainScreenState extends State<MainScreen> {
                                 elevation: 0,
                                 child: InkWell(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
-                                  onTap: () { toModulesPage(context, 0); },
+                                      BorderRadius.all(Radius.circular(18.0)),
+                                  onTap: () {
+                                    toModulesPage(context, 0);
+                                  },
                                   child: Container(
                                     padding: EdgeInsets.all(10),
                                     width: MediaQuery.of(context).size.width,
                                     height: 200,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.centerRight,
-                                          colors: [darkBlue, lightBlue]),
+                                          Radius.circular(18.0)),
+                                      color: whiteColor,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: mainShadowColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 6.0,
+                                            spreadRadius: 0.07)
+                                      ],
                                     ),
                                     child: Column(
                                       mainAxisAlignment:
@@ -149,7 +156,7 @@ class _MainScreenState extends State<MainScreen> {
                                         Text(
                                           "Сегодня",
                                           style: TextStyle(
-                                            color: whiteColor,
+                                            color: textColor,
                                             fontSize: 21,
                                             fontWeight: FontWeight.w800,
                                           ),
@@ -161,8 +168,9 @@ class _MainScreenState extends State<MainScreen> {
                                           alignment: Alignment.center,
                                           children: <Widget>[
                                             Icon(
-                                              Icons.account_balance_wallet_rounded,
-                                              color: whiteColor,
+                                              Icons
+                                                  .account_balance_wallet_rounded,
+                                              color: lightBlue,
                                               size: 31,
                                             ),
                                             SizedBox(
@@ -171,10 +179,10 @@ class _MainScreenState extends State<MainScreen> {
                                               child: CircularProgressIndicator(
                                                 value: 0.82,
                                                 strokeWidth: 4.5,
-                                                backgroundColor: whiteColor,
+                                                backgroundColor: whiteGrey,
                                                 valueColor:
                                                     AlwaysStoppedAnimation<
-                                                        Color>(greenIndiator),
+                                                        Color>(lightBlue),
                                               ),
                                             ),
                                           ],
@@ -185,43 +193,42 @@ class _MainScreenState extends State<MainScreen> {
                                         Text(
                                           "850₽",
                                           style: TextStyle(
-                                            color: whiteColor,
+                                            color: textColor,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ],
-                                    ),                                  ),
+                                    ),
+                                  ),
                                 ),
                               ),
                               Card(
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(25))),
+                                        BorderRadius.all(Radius.circular(18))),
                                 child: InkWell(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
+                                      BorderRadius.all(Radius.circular(18.0)),
                                   splashColor: Colors.blue.withAlpha(30),
-                                  onTap: () {toModulesPage(context, 2);},
+                                  onTap: () {
+                                    toModulesPage(context, 2);
+                                  },
                                   child: Container(
                                     padding: EdgeInsets.all(10),
                                     width: MediaQuery.of(context).size.width,
                                     height: 140,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.centerRight,
-                                          colors: [lightBlue, seaWave]),
+                                          Radius.circular(18.0)),
+                                      color: whiteColor,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: mainShadowColor,
-                                          offset: const Offset(0.0, 0.0),
-                                          blurRadius: 10.0,
-                                          spreadRadius: 0.1,
-                                        )
+                                            color: mainShadowColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 6.0,
+                                            spreadRadius: 0.07)
                                       ],
                                     ),
                                     child: Column(
@@ -231,7 +238,7 @@ class _MainScreenState extends State<MainScreen> {
                                         Text(
                                           "Цели",
                                           style: TextStyle(
-                                            color: whiteColor,
+                                            color: textColor,
                                             fontSize: 21,
                                             fontWeight: FontWeight.w800,
                                           ),
@@ -241,7 +248,7 @@ class _MainScreenState extends State<MainScreen> {
                                         ),
                                         Icon(
                                           Icons.gps_fixed_rounded,
-                                          color: whiteColor,
+                                          color: lightBlue,
                                           size: 50,
                                         ),
                                         SizedBox(
@@ -250,7 +257,7 @@ class _MainScreenState extends State<MainScreen> {
                                         Text(
                                           "SMART",
                                           style: TextStyle(
-                                            color: whiteColor,
+                                            color: textColor,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -264,17 +271,17 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          width: MediaQuery.of(context).size.width / 2 - 25,
                           child: Column(
                             children: [
                               Card(
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(25))),
+                                        BorderRadius.all(Radius.circular(18))),
                                 child: InkWell(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
+                                      BorderRadius.all(Radius.circular(18.0)),
                                   splashColor: Colors.blue.withAlpha(30),
                                   onTap: () {},
                                   child: Container(
@@ -283,18 +290,14 @@ class _MainScreenState extends State<MainScreen> {
                                     height: 140,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.centerRight,
-                                          colors: [lightBlue, seaWave]),
+                                          Radius.circular(18.0)),
+                                      color: whiteColor,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: mainShadowColor,
-                                          offset: const Offset(0.0, 0.0),
-                                          blurRadius: 10.0,
-                                          spreadRadius: 0.1,
-                                        )
+                                            color: mainShadowColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 6.0,
+                                            spreadRadius: 0.07)
                                       ],
                                     ),
                                     child: Column(
@@ -304,7 +307,7 @@ class _MainScreenState extends State<MainScreen> {
                                         Text(
                                           "Cпорт",
                                           style: TextStyle(
-                                            color: whiteColor,
+                                            color: textColor,
                                             fontSize: 21,
                                             fontWeight: FontWeight.w800,
                                           ),
@@ -317,7 +320,7 @@ class _MainScreenState extends State<MainScreen> {
                                           children: <Widget>[
                                             Icon(
                                               Icons.fitness_center_rounded,
-                                              color: whiteColor,
+                                              color: lightBlue,
                                               size: 38,
                                             ),
                                             SizedBox(
@@ -326,10 +329,10 @@ class _MainScreenState extends State<MainScreen> {
                                               child: CircularProgressIndicator(
                                                 value: 0.7,
                                                 strokeWidth: 4.5,
-                                                backgroundColor: whiteColor,
+                                                backgroundColor: whiteGrey,
                                                 valueColor:
                                                     AlwaysStoppedAnimation<
-                                                        Color>(greenIndiator),
+                                                        Color>(lightBlue),
                                               ),
                                             ),
                                           ],
@@ -343,10 +346,10 @@ class _MainScreenState extends State<MainScreen> {
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(25))),
+                                        BorderRadius.all(Radius.circular(18))),
                                 child: InkWell(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
+                                      BorderRadius.all(Radius.circular(18.0)),
                                   splashColor: Colors.blue.withAlpha(30),
                                   onTap: () {
                                     toTaskManagerPage(context, false, null);
@@ -357,18 +360,14 @@ class _MainScreenState extends State<MainScreen> {
                                     height: 200,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.centerRight,
-                                          colors: [darkBlue, lightBlue]),
+                                          Radius.circular(18.0)),
+                                      color: whiteColor,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: mainShadowColor,
-                                          offset: const Offset(0.0, 0.0),
-                                          blurRadius: 10.0,
-                                          spreadRadius: 0.1,
-                                        )
+                                            color: mainShadowColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 6.0,
+                                            spreadRadius: 0.07)
                                       ],
                                     ),
                                     child: Column(
@@ -378,7 +377,7 @@ class _MainScreenState extends State<MainScreen> {
                                         Text(
                                           "Задачи",
                                           style: TextStyle(
-                                            color: whiteColor,
+                                            color: textColor,
                                             fontSize: 21,
                                             fontWeight: FontWeight.w800,
                                           ),
@@ -399,7 +398,7 @@ class _MainScreenState extends State<MainScreen> {
                                               Container(
                                                 height: 7,
                                                 width: 3,
-                                                color: whiteColor,
+                                                color: lightBlue,
                                                 margin:
                                                     EdgeInsets.only(left: 12),
                                               ),
@@ -408,7 +407,7 @@ class _MainScreenState extends State<MainScreen> {
                                               Container(
                                                 height: 7,
                                                 width: 3,
-                                                color: whiteColor,
+                                                color: lightBlue,
                                                 margin:
                                                     EdgeInsets.only(left: 12),
                                               ),
@@ -427,26 +426,18 @@ class _MainScreenState extends State<MainScreen> {
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(50.0)),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: indigo,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 7.0,
-                                                spreadRadius: 1.0,
-                                              )
-                                            ],
                                           ),
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               shadowColor: Colors.transparent,
                                               minimumSize: Size(50, 29),
                                               padding: EdgeInsets.all(1),
-                                              primary: darkBlue,
+                                              primary: whiteColor,
                                               onPrimary: Colors.transparent,
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(25))),
+                                                          Radius.circular(18))),
                                               elevation: 0,
                                             ),
                                             onPressed: () {},
@@ -455,7 +446,7 @@ class _MainScreenState extends State<MainScreen> {
                                                 Icon(
                                                   Icons
                                                       .add_circle_outline_rounded,
-                                                  color: whiteColor,
+                                                  color: lightBlue,
                                                   size: 27,
                                                 ),
                                                 SizedBox(
@@ -465,7 +456,7 @@ class _MainScreenState extends State<MainScreen> {
                                                 const Text(
                                                   'Добавить',
                                                   style: TextStyle(
-                                                    color: whiteColor,
+                                                    color: lightBlue,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -485,27 +476,26 @@ class _MainScreenState extends State<MainScreen> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 25),
+                      padding: const EdgeInsets.only(top: 15),
                       child: Card(
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(25))),
+                                BorderRadius.all(Radius.circular(18))),
                         child: InkWell(
-                          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                          borderRadius: BorderRadius.all(Radius.circular(18.0)),
                           splashColor: Colors.blue.withAlpha(30),
-                          onTap: () { toModulesPage(context, 3); },
+                          onTap: () {
+                            toModulesPage(context, 3);
+                          },
                           child: Container(
                             padding: EdgeInsets.all(10),
                             width: MediaQuery.of(context).size.width,
                             height: 210,
                             decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(25.0)),
-                              gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.centerRight,
-                                  colors: [lightBlue, seaWave]),
+                                  BorderRadius.all(Radius.circular(18.0)),
+                              color: whiteColor,
                               boxShadow: [
                                 BoxShadow(
                                   color: mainShadowColor,
@@ -521,7 +511,7 @@ class _MainScreenState extends State<MainScreen> {
                                 Text(
                                   "Жизненный баланс",
                                   style: TextStyle(
-                                    color: whiteColor,
+                                    color: textColor,
                                     fontSize: 21,
                                     fontWeight: FontWeight.w800,
                                   ),
@@ -550,9 +540,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: bottomNavBar(context,tabId: 1),
+      bottomNavigationBar: bottomNavBar(context, tabId: 1),
     );
   }
 }
-
-
