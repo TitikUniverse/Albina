@@ -1,10 +1,8 @@
 import 'package:albina/constants.dart';
-import 'package:albina/services/gradientBoxBorder.dart';
 import 'package:albina/services/gradientIconMask.dart';
 import 'package:albina/navigation.dart';
 import 'package:flutter/material.dart';
 
-@override
 Widget noAppBar() {
   return AppBar(
     toolbarHeight: 0,
@@ -13,7 +11,6 @@ Widget noAppBar() {
   );
 }
 
-@override
 Widget topBackBtn(BuildContext context) {
   return AppBar(
     toolbarHeight: 50,
@@ -31,13 +28,12 @@ Widget topBackBtn(BuildContext context) {
         ),
       ),
       onPressed: () {
-        toMainPage(context);
+        Navigator.pop(context);
       },
     ),
   );
 }
 
-@override
 Widget topMenuBtn(Color bgColor) {
   return AppBar(
     automaticallyImplyLeading: false,
@@ -71,7 +67,6 @@ Widget topMenuBtn(Color bgColor) {
   );
 }
 
-@override
 Widget setDarkIcon() {
   return MenuGradientMask(
     child: Icon(
@@ -82,7 +77,6 @@ Widget setDarkIcon() {
   );
 }
 
-@override
 Widget setLightIcon() {
   return LightMenuGradientMask(
     child: Icon(
@@ -195,7 +189,6 @@ Widget setLightIcon() {
 //   }
 // }
 
-@override
 class SearchAppBar extends StatefulWidget {
   SearchAppBar({Key key}) : super(key: key);
 
@@ -241,7 +234,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                   color: mainShadowColor,
                   offset: const Offset(0.0, 0.0),
                   blurRadius: 6.0,
-                spreadRadius: 0.07)
+                  spreadRadius: 0.07)
             ],
           ),
         ),
@@ -263,7 +256,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                   color: mainShadowColor,
                   offset: const Offset(0.0, 0.0),
                   blurRadius: 6.0,
-                spreadRadius: 0.07)
+                  spreadRadius: 0.07)
             ],
           ),
           child: SizedBox(
@@ -301,7 +294,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
   }
 }
 
-@override
 Widget bottomNavBar(context, {int tabId}) {
   return BottomAppBar(
     //bottom navigation bar on scaffold

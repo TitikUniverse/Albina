@@ -5,6 +5,7 @@ import 'package:albina/pages/screens/mainScreen.dart';
 import 'package:albina/pages/screens/modules.dart';
 import 'package:albina/pages/screens/taskManager.dart';
 import 'package:albina/widgets/addTargetPage.dart';
+import 'package:albina/widgets/categoriesPage.dart';
 import 'package:albina/widgets/qrAddExpense.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -41,9 +42,7 @@ void toQrAddExpense(context, expenseModel) {
       context,
       PageTransition(
           type: PageTransitionType.fade,
-          child: AddQrExpense(
-            expenseModel: expenseModel
-          )));
+          child: AddQrExpense(expenseModel: expenseModel)));
 }
 
 void toAddTargetPage(context) {
@@ -62,4 +61,9 @@ void toTaskManagerPage(context, bool isSmart, int smartId) {
 void toAssistantChat(context) {
   // Navigator.push(context,
   //   PageTransition(type: PageTransitionType.fade, child: AssistantChat()));
+}
+
+void toCategoriesPage(context) {
+  Navigator.push(context,
+      PageTransition(type: PageTransitionType.fade, child: CategoriesPage()));
 }

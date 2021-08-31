@@ -110,7 +110,9 @@ class _ExpenseState extends State<Expense> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  toCategoriesPage(context);
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.transparent,
                   shadowColor: Colors.transparent,
@@ -266,7 +268,7 @@ class _ExpenseState extends State<Expense> {
                     Container(
                       padding: EdgeInsets.all(10),
                       width: MediaQuery.of(context).size.width / 2 - 30,
-                      height: 185,
+                      height: 155,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(18.0)),
                         color: whiteColor,
@@ -331,7 +333,7 @@ class _ExpenseState extends State<Expense> {
                     Container(
                       padding: EdgeInsets.all(10),
                       width: MediaQuery.of(context).size.width / 2 - 30,
-                      height: 185,
+                      height: 155,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(18.0)),
                         color: whiteColor,
