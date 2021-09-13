@@ -53,7 +53,7 @@ class _ExpenseState extends State<Expense> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () { toLimitsPage(context); },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.transparent,
                   shadowColor: Colors.transparent,

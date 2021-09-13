@@ -6,6 +6,7 @@ import 'package:albina/pages/screens/modules.dart';
 import 'package:albina/pages/screens/taskManager.dart';
 import 'package:albina/widgets/addTargetPage.dart';
 import 'package:albina/widgets/categoriesPage.dart';
+import 'package:albina/widgets/limitsPage.dart';
 import 'package:albina/widgets/qrAddExpense.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -66,4 +67,9 @@ void toAssistantChat(context) {
 void toCategoriesPage(context) {
   Navigator.push(context,
       PageTransition(type: PageTransitionType.fade, child: CategoriesPage()));
+}
+
+void toLimitsPage(context) {
+  Navigator.push(context,
+      PageTransition(type: PageTransitionType.fade, child: LimitsPage()));
 }

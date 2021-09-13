@@ -26,6 +26,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               children: [
                 Container(
                   width: size.width,
+                  margin: const EdgeInsets.only(bottom: 18),
                   alignment: Alignment.center,
                   child: Text(
                     'Мои категории',
@@ -37,6 +38,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   ),
                 ),
                 Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                  ),
                   margin: EdgeInsets.symmetric(vertical: 5),
                   child: ExpansionCard(
                     margin: EdgeInsets.zero,
@@ -54,19 +58,102 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     ),
                     children: <Widget>[
                       Container(
-                        child: Container(
-                          padding: EdgeInsets.all(5.0),
-                          child: Wrap(
-                            direction: Axis.horizontal,
-                            alignment: WrapAlignment.start,
-                            runAlignment: WrapAlignment.start,
-                            spacing: 5.0,
-                            children: [
-                              Chip(
-                                label: Text('Мак-дак'),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(18.0))
+                        ),
+                        padding: EdgeInsets.all(5.0),
+                        child: Column(
+                          children: <Widget>[
+                            Wrap(
+                              direction: Axis.horizontal,
+                              alignment: WrapAlignment.center,
+                              runAlignment: WrapAlignment.center,
+                              spacing: 5.0,
+                              children: [
+                                Chip(
+                                  label: Text('Мак-дак'),
+                                ),
+                                Chip(
+                                  label: Text('Мак-дакович'),
+                                ),
+                                Chip(
+                                  label: Text('Мак-дак'),
+                                ),
+                                Chip(
+                                  label: Text('Мак-дак'),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Container(
+                                    padding: EdgeInsets.zero,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      border: Border.all(
+                                        color: Colors.blueAccent,
+                                        width: 2
+                                      )
+                                    ),
+                                    child: SizedBox(
+                                      height: 35,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          onPrimary: lightBlue50,
+                                          primary: Colors.transparent,
+                                          shadowColor: Colors.transparent,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(50)),
+                                        ),
+                                        onPressed: () {},
+                                        child: Text(
+                                          "Изменить",
+                                          style: TextStyle(
+                                            color: lightBlue
+                                          )
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 8.0
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.zero,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      border: Border.all(
+                                        color: Colors.blueAccent,
+                                        width: 2
+                                      )
+                                    ),
+                                    child: SizedBox(
+                                      height: 35,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          onPrimary: darkBlue,
+                                          primary: lightBlue,
+                                          shadowColor: Colors.transparent,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(50)),
+                                        ),
+                                        onPressed: () {},
+                                        child: Text(
+                                          "Добавить",
+                                          style: TextStyle(
+                                            color: whiteColor
+                                          )
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ]
                               ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                       ),
                     ],
