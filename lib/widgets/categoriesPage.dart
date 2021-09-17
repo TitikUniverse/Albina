@@ -54,24 +54,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     ),
                     children: <Widget>[
                       Container(
-<<<<<<< Updated upstream
-                        child: Container(
-                          padding: EdgeInsets.all(5.0),
-                          child: Wrap(
-                            direction: Axis.horizontal,
-                            alignment: WrapAlignment.start,
-                            runAlignment: WrapAlignment.start,
-                            spacing: 5.0,
-                            children: [
-                              Chip(
-                                label: Text('Мак-дак'),
-                              ),
-                            ],
-                          ),
-=======
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(18.0))),
                         padding: EdgeInsets.all(5.0),
                         child: Column(
                           children: <Widget>[
@@ -154,7 +136,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                   ]),
                             )
                           ],
->>>>>>> Stashed changes
                         ),
                       ),
                     ],

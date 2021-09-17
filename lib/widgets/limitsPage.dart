@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import 'dart:io';
 
 import 'package:albina/constants.dart';
@@ -119,4 +117,3 @@ class _LimitsPageState extends State<LimitsPage> {
     );
   }
 }
->>>>>>> Stashed changes
