@@ -53,7 +53,13 @@ class _ExpenseState extends State<Expense> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
+<<<<<<< Updated upstream
                 onPressed: () {},
+=======
+                onPressed: () {
+                  toLimitsPage(context);
+                },
+>>>>>>> Stashed changes
                 style: ElevatedButton.styleFrom(
                   primary: Colors.transparent,
                   shadowColor: Colors.transparent,
@@ -536,11 +542,14 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
                 child: Column(
                   children: [
                     Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                      ),
                       margin: EdgeInsets.symmetric(vertical: 5),
                       child: ExpansionCard(
                         margin: EdgeInsets.zero,
                         borderRadius: 25.0,
-                        backgroundColor: whiteColor,
+                        backgroundColor: Colors.transparent,
                         title: Container(
                           child: Text(
                             "Общепит",
@@ -721,11 +730,14 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
                       ),
                     ),
                     Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                      ),
                       margin: EdgeInsets.symmetric(vertical: 5),
                       child: ExpansionCard(
                         margin: EdgeInsets.zero,
                         borderRadius: 25.0,
-                        backgroundColor: whiteColor,
+                        backgroundColor: Colors.transparent,
                         title: Container(
                           child: Text(
                             "Общепит",
@@ -848,11 +860,14 @@ class _AddExpenceDialogState extends State<AddExpenceDialog> {
                       ),
                     ),
                     Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                      ),
                       margin: EdgeInsets.symmetric(vertical: 5),
                       child: ExpansionCard(
                         margin: EdgeInsets.zero,
                         borderRadius: 25.0,
-                        backgroundColor: whiteColor,
+                        backgroundColor: Colors.transparent,
                         title: Container(
                           child: Text(
                             "Общепит",
